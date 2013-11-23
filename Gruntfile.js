@@ -25,9 +25,21 @@ grunt.initConfig({
   clean: ['dist/'],
 
   preprocess : {
-    html : {
+    index : {
       src : 'src/index.html',
       dest : 'dist/index.html'
+    },
+    upload : {
+      src : 'src/upload.html',
+      dest : 'dist/upload.html'
+    }
+  },
+
+  copy: {
+    main: {
+      files: [
+        { expand: true, cwd: 'src/img/', src: ['**'], dest: 'dist/img' }
+      ]
     }
   },
 
@@ -148,10 +160,11 @@ grunt.loadNpmTasks( 'grunt-contrib-sass' );
 grunt.loadNpmTasks( 'grunt-contrib-connect' );
 grunt.loadNpmTasks( 'grunt-contrib-concat' );
 grunt.loadNpmTasks( 'grunt-contrib-clean' );
+grunt.loadNpmTasks( 'grunt-contrib-copy' );
 grunt.loadNpmTasks( 'grunt-env' );
 grunt.loadNpmTasks( 'grunt-preprocess' );
 
-grunt.registerTask( 'build', [ 'clean', 'concat', 'sass', 'preprocess', 'cssmin', 'uglify' ] );
+grunt.registerTask( 'build', [ 'clean', 'concat', 'sass', 'preprocess', 'cssmin', 'uglify', 'copy' ] );
 grunt.registerTask( 'test', [ 'csslint', 'jshint', 'concat', 'jasmine' ] );
 grunt.registerTask( 'release', [ 'env:prod', 'build', 'test' ] );
 grunt.registerTask( 'serve', [ 'build', 'test', 'connect', 'watch' ] );
