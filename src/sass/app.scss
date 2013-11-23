@@ -1,14 +1,17 @@
 $indicator-background-color: black;
+$step-action-background-color: black;
+$media-background-color: gray;
 
 body {
   margin: 1em;
 }
 
-.mobile {
+.viewport {
 	width: 320px;
-	height: 480px;
+	height: 420px;
 	background: #ffa;
 	border: 1px solid black;
+	position: relative;
 }
 
 .indicator {
@@ -16,3 +19,19 @@ body {
 	height: 20px;
 	background: $indicator-background-color;
 }
+
+.media {
+	width: 100%;
+	height: 150px;
+	background-image: image-url('eda.jpg');
+	background-color: $media-background-color;
+}
+
+.step-action {
+	width: 100%;
+	height: 80px;
+	background: $step-action-background-color;
+	position: absolute;
+	bottom: 0px;
+}
+
