@@ -175,7 +175,7 @@ grunt.registerTask( 'test', [ 'csslint', 'jshint', 'concat' ] );
 grunt.registerTask( 'build', [ 'clean', 'compile', 'copy:bower', 'test' ] );
 grunt.registerTask( 'rebuild', [ 'compile', 'test' ] );
 grunt.registerTask( 'release', [ 'env:prod', 'build' ] );
-grunt.registerTask( 'serve', [ 'build', 'connect', 'watch' ] );
+grunt.registerTask( 'serve', [ 'build', 'watch' ] );
 grunt.registerTask( 'default', [ 'env:dev', 'serve' ] );
 
 };

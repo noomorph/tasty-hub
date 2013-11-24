@@ -21,6 +21,7 @@ $notification-bar-background-color: black;
 	border: 2px solid;
 	border-radius: $bubble-diameter;
 	text-align: center;
+	cursor: pointer;
 
 	&.available {
 		border-color: yellow;

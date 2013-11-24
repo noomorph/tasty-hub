@@ -52,12 +52,28 @@
 
 .step-action {
 	width: 100%;
+	text-align: center;
 	height: $step-action-height;
 	background: $step-action-background-color;
 	position: absolute;
 	bottom: 0;
 
 	a {
-		text-decoration: none;
+		display: block;
+ 		text-decoration: none;
+ 		text-transform: uppercase;
+ 		color: white;
+ 		font-size: 1.25em;
+ 		margin-top: 15px;
 	}
+}
+
+.grayscale { 
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: url(grayscale.svg); /* Firefox 4+ */
+  filter: gray; /* IE 6-9 */
 }

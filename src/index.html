@@ -43,25 +43,23 @@
     <a href="#/steps/0">Bon Appetit!</a>
   </script>
   <script type="text/html" id="action-tick">
-    <img data-bind="attr: { src: tickImageURL }" />
-    <a href="#" data-bind="click: function () { this.done(!this.done()); }">Done</a> <!-- return false -->
+    <a href="#" data-bind="click: markDone, disable: status() === 'forbidden'">Done</a> <!-- return false -->
   </script>
   <script type="text/html" id="action-timer">
-    <button class="step-timer-button">
-      Start countdown to
-      <span data-bind="text: duration"></span>
-    </button>
+    <a href="#" data-bind="click: countdown">
+      Countdown <span data-bind="text: duration"></span> minutes
+    </a>
   </script>
 </head>
 <body>
-  <div class="tastyhub-widget">
+  <div class="tastyhub-widget" data-bind="style: { display: 'block' }">
     <div class="notification-bar" data-bind="visible: started">
       <div class="bubble-stripe" data-bind="foreach: steps">
         <!-- ko if: status() === 'done' -->
-        <a class="bubble done" data-bind="click: select"> &#10003; </a>
+        <a class="bubble done" data-bind="click: select"> &nbsp; </a>
         <!-- /ko -->
         <!-- ko if: status() === 'forbidden' -->
-        <a class="bubble forbidden" data-bind="click: select"> &times; </a>
+        <a class="bubble forbidden" data-bind="click: select"> &nbsp; </a>
         <!-- /ko -->
         <!-- ko if: status() === 'progress' -->
         <a class="bubble progress" data-bind="click: select, text: timeLeft"> </a>
@@ -75,7 +73,7 @@
       </div> <!-- /bubble-indicator-stripe -->
     </div>
     <div class="step-list" data-bind="foreach: steps">
-	  <div class="step" data-bind="visible: $index() == $parent.stepIndex()">
+	  <div class="step" data-bind="visible: $index() == $parent.stepIndex(), css: { grayscale: status() === 'forbidden' }">
         <div class="step-media" data-bind="foreach: mediaItems">
           <div class="step-media-item" data-bind="visible: $parent.mediaIndex() == $index(), template: mediaTemplateId"></div>
         </div> <!-- /step-media -->
@@ -97,6 +95,7 @@
   <script src="bower_components/knockout/build/output/knockout-latest.debug.js"></script>
   <script src="bower_components/knockout.mapping/build/output/knockout.mapping-latest.debug.js"></script>
   <script src="bower_components/knockout-sortable/build/knockout-sortable.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script src="js/app.js"></script>
   <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
   <!-- @endif -->

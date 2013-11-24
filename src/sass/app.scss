@@ -7,5 +7,9 @@ body {
 	font-size: $body-font-size;
 }
 
+.tastyhub-widget {
+	display: none;
+}
+
 @import 'navigation';
 @import 'steps';
