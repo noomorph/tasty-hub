@@ -29,9 +29,9 @@ grunt.initConfig({
       src : 'src/index.html',
       dest : 'dist/index.html'
     },
-    upload : {
-      src : 'src/upload.html',
-      dest : 'dist/upload.html'
+    settings : {
+      src : 'src/settings.html',
+      dest : 'dist/settings.html'
     }
   },
 
@@ -164,10 +164,11 @@ grunt.loadNpmTasks( 'grunt-contrib-copy' );
 grunt.loadNpmTasks( 'grunt-env' );
 grunt.loadNpmTasks( 'grunt-preprocess' );
 
-grunt.registerTask( 'build', [ 'clean', 'concat', 'sass', 'preprocess', 'cssmin', 'uglify', 'copy' ] );
+grunt.registerTask( 'compile', [ 'clean', 'concat', 'sass', 'preprocess', 'cssmin', 'uglify', 'copy' ] );
 grunt.registerTask( 'test', [ 'csslint', 'jshint', 'concat', 'jasmine' ] );
-grunt.registerTask( 'release', [ 'env:prod', 'build', 'test' ] );
-grunt.registerTask( 'serve', [ 'build', 'test', 'connect', 'watch' ] );
+grunt.registerTask( 'build', [ 'compile', 'test' ] );
+grunt.registerTask( 'release', [ 'env:prod', 'build' ] );
+grunt.registerTask( 'serve', [ 'build', 'connect', 'watch' ] );
 grunt.registerTask( 'default', [ 'env:dev', 'serve' ] );
 
 };
