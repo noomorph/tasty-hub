@@ -81,7 +81,7 @@
       </div> <!-- /bubble-indicator-stripe -->
     </div>
     <div class="step-list" data-bind="foreach: steps">
-      <div class="step" data-bind="style: { left: style.left }">
+	  <div class="step" data-bind="visible: $index() == $parent.stepIndex()">
         <div class="step-media" data-bind="foreach: mediaItems">
           <div class="step-media-item" data-bind="visible: $parent.mediaIndex() == $index(), template: mediaTemplateId"></div>
         </div> <!-- /step-media -->

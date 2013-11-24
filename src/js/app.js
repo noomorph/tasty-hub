@@ -99,7 +99,7 @@
       }
     };
 
-    this.stepIndex = ko.observable(0);
+    this.stepIndex = ko.observable(config.stepIndex || 0);
     this.steps = ko.observableArray();
 
     (config.steps || []).forEach(function (step) {
@@ -121,18 +121,28 @@
   }
 
   window.recipe = new RecipeViewModel({
+	stepIndex: 2,
     steps: [
       {
         mediaItems: [
-          {},
-          { src: 'http://www.youtube.com/watch?v=17Onb2MBL_8'},
-          { src: 'http://vimeo.com/73716693' }
+          { src: 'img/eda.jpg'}
         ],
-        title: 'Boil the water',
+        header: 'Boil the water',
         description: 'Place water in large enough pot to hold 3 cups without boiling over.'
       },
       {
-
+        mediaItems: [
+          { src: 'http://www.youtube.com/watch?v=17Onb2MBL_8'}
+        ],
+        header: 'Chop the meat',
+        description: 'Place water in large enough pot to hold 3 cups without boiling over.'
+      },
+      {
+        mediaItems: [
+          { src: 'http://vimeo.com/73716693' }
+        ],
+        header: 'Cut vegetables',
+        description: 'Place water in large enough pot to hold 3 cups without boiling over.'
       }
     ]
   });

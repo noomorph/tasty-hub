@@ -9,6 +9,9 @@
   ],
   "dependencies": {
     "knockout-sortable": "~0.8.3",
-    "knockout.mapping": "~2.0.1"
+    "knockout.mapping": "~2.0.1",
+    "knockout": "~3.0.0",
+    "jquery": "~2.0.3",
+    "jquery-ui": "~1.10.3"
   }
 }

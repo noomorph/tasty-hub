@@ -39,10 +39,14 @@ grunt.initConfig({
     main: {
       files: [
         { expand: true, cwd: 'src/img/', src: ['**'], dest: 'dist/img' },
-        { expand: true, cwd: 'src/vendor/', src: ['**'], dest: 'dist/vendor' },
+        { expand: true, cwd: 'src/vendor/', src: ['**'], dest: 'dist/vendor' }
+      ]
+    },
+	bower: {
+      files: [
         { expand: true, cwd: 'src/bower_components/', src: ['**'], dest: 'dist/bower_components' }
       ]
-    }
+	}
   },
 
   jasmine: {
@@ -141,7 +145,7 @@ grunt.initConfig({
   watch: {
     main: {
       files: [ 'Gruntfile.js', 'src/js/**/*.js', 'src/sass/**/*.scss', 'src/*.html' ],
-      tasks: 'build'
+      tasks: 'rebuild'
     },
     test: {
       files: [ 'Gruntfile.js', 'spec/**/*.js', 'src/js/**/*.js' ],
@@ -166,9 +170,10 @@ grunt.loadNpmTasks( 'grunt-contrib-copy' );
 grunt.loadNpmTasks( 'grunt-env' );
 grunt.loadNpmTasks( 'grunt-preprocess' );
 
-grunt.registerTask( 'compile', [ 'clean', 'concat', 'sass', 'preprocess', 'cssmin', 'uglify', 'copy' ] );
+grunt.registerTask( 'compile', [ 'concat', 'sass', 'preprocess', 'cssmin', 'uglify', 'copy:main' ] );
 grunt.registerTask( 'test', [ 'csslint', 'jshint', 'concat' ] );
-grunt.registerTask( 'build', [ 'compile', 'test' ] );
+grunt.registerTask( 'build', [ 'clean', 'compile', 'copy:bower', 'test' ] );
+grunt.registerTask( 'rebuild', [ 'compile', 'test' ] );
 grunt.registerTask( 'release', [ 'env:prod', 'build' ] );
 grunt.registerTask( 'serve', [ 'build', 'connect', 'watch' ] );
 grunt.registerTask( 'default', [ 'env:dev', 'serve' ] );
