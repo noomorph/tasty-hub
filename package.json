@@ -18,7 +18,9 @@
     "newrelic": "~1.1.1",
     "eyes": "~0.1.8",
     "b64url": "~1.0.3",
-    "crypto": "0.0.3"
+    "crypto": "0.0.3",
+    "redis": "~0.9.1",
+    "socket.io": "~0.9.16"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

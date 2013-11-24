@@ -132,25 +132,26 @@
   }
 
   window.recipe = new RecipeViewModel({
-  stepIndex: 0,
+    
+    stepIndex: 0,
     steps: [
-    {
-      mediaItems: [{ src: 'img/ingredients.jpg'}],
-      header: 'Prepare ingredients',
-      description:
-        '2 large or 3 medium beets, thoroughly washed. \n' + 
-        '2 large or 3 medium potatoes, sliced into bite-sized pieces.\n' +
-        '4 Tbsp of cooking oil. \n' +
-        '1 medium onion, finely chopped. \n' +
-        '2 carrots, grated \n' +
-        '1/2 head of cabbage, thinly chopped (see picture) \n' +
-        '1 can kidney beans with their juice \n' +
-        '2 bay leaves \n' +
-        '16 cup of water \n' +
-        '5 Tbsp ketchup \n' +
-        '4 Tbsp lemon juice \n' +
-        '1/4 tsp freshly ground pepper \n' +
-        '1 Tbsp dill'
+      {
+        mediaItems: [{ src: 'img/ingredients.jpg'}],
+        header: 'Prepare ingredients',
+        description:
+          '2 large or 3 medium beets, thoroughly washed. \n' + 
+          '2 large or 3 medium potatoes, sliced into bite-sized pieces.\n' +
+          '4 Tbsp of cooking oil. \n' +
+          '1 medium onion, finely chopped. \n' +
+          '2 carrots, grated \n' +
+          '1/2 head of cabbage, thinly chopped (see picture) \n' +
+          '1 can kidney beans with their juice \n' +
+          '2 bay leaves \n' +
+          '16 cup of water \n' +
+          '5 Tbsp ketchup \n' +
+          '4 Tbsp lemon juice \n' +
+          '1/4 tsp freshly ground pepper \n' +
+          '1 Tbsp dill'
       },
       {
         mediaItems: [{ src: 'img/1.jpg'}],
@@ -185,10 +186,7 @@
         description: 'Grate both carrots and dice one onion.'
       },
       {
-        mediaItems: [
-          { src: 'img/6.1.jpg'},
-          { src: 'img/6.2.jpg'}
-        ],
+        mediaItems: [{ src: 'img/6.1.jpg'}],
         header: 'Roasting',
         description: 
           'Take carrots and onion. \n' +
@@ -229,17 +227,7 @@
           'Cook 5-10 minutes, until the cabbage is done.'
       },
       {
-        mediaItems: [
-          { src: 'img/10.1.jpg'},
-          { src: 'img/10.2.jpg'},
-          { src: 'img/10.3.jpg'},
-          { src: 'img/10.4.jpg'},
-          { src: 'img/10.5.jpg'},
-          { src: 'img/10.6.jpg'},
-          { src: 'img/10.7.jpg'},
-          { src: 'img/10.8.jpg'},
-          { src: 'img/10.9.jpg'}
-        ],
+        mediaItems: [{ src: 'img/10.1.jpg'}],
         header: 'Adding ingredients and finish',
         description:
           'Add 6 cups of water, beets, lemon juice, ' +
