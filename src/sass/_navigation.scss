@@ -6,13 +6,7 @@ $notification-bar-background-color: black;
 .notification-bar {
 	width: 100%;
 	background: $notification-bar-background-color;
-	padding: 4px 0;
-
-	.current {
-		display: inline-block;
-		padding-bottom: 4px;
-		border-bottom: 2px solid yellow;
-	}
+	padding: 2px 0;
 }
 
 .bubble {
@@ -21,7 +15,7 @@ $notification-bar-background-color: black;
 	display: inline-block;
 	width: $bubble-diameter;
 	height: $bubble-diameter;
-	margin: 0 2px;
+	margin: 2px 2px;
 	font-size: 12px;
 	line-height: 12px;
 	border: 2px solid;

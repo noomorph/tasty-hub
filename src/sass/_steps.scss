@@ -45,7 +45,9 @@
 
 .step-media-picture {
 	background-color: $step-media-background-color;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .step-action {
