@@ -1,0 +1,14 @@
+{
+  "name": "scrumban",
+  "version": "0.1.0",
+  "main": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "knockout-sortable": "~0.8.3",
+    "knockout.mapping": "~2.0.1"
+  }
+}

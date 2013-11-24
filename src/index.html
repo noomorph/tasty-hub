@@ -1,71 +1,113 @@
 <!doctype html>
 <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <title>Wix Sample App Demo</title>
-      <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-      <![endif]-->
-      <script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.16.0/js/Wix.js"></script>
-      <!-- @if NODE_ENV='development' -->
-      <link rel="stylesheet" href="css/app.css" />
-      <!-- @endif -->
-      <!-- @if NODE_ENV='production' -->
-      <link rel="stylesheet" href="css/app.min.css" />
-      <!-- @endif -->
-    </head>
-    <body>
-      <div class="viewport">
-        <div class="notification-bar">
-        </div>
-		<div class="step-list">
-			<div id="step1" class="step">
-				<div class="step-media" style="background-image: url(img/eda.jpg)">
-				
-				</div>
-				<div class="step-text">
-					<h2 class="step-header">Vari buljon</h2>
-					<div class="step-description">
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Phasellus tellus tortor, laoreet vitae posuere eget, accumsan sed massa.
-						Nunc tempor ipsum ut purus dapibus, sit amet consequat nisl imperdiet.
-						Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos.
-					</p>
-					</div>
-				</div>
-				<div class="step-action">
-				
-				</div>
-			</div>
-			<div id="step2" class="step">
-				<div class="step-media">
-				
-				</div>
-				<div class="step-text">
-					<h2>Vari myaso</h2>
-					<div class="step-description">
-						<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tellus tortor, laoreet vitae posuere eget, accumsan sed massa. Nunc tempor ipsum ut purus dapibus, sit amet consequat nisl imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
-						</p>
-						<p>
-						In mattis, libero in pulvinar malesuada, metus nisi gravida urna, vitae accumsan erat lorem nec elit. Vestibulum eget quam ut urna feugiat gravida. Integer ut dui dapibus nulla ultrices cursus nec a sem. Nulla sollicitudin felis et tincidunt sodales.
-						</p>
-					</div>
-				</div>
-				<div class="step-action">
-				
-				</div>
-			</div>
-		</div>
-      </div>
-      <h1 id="dbg">Hello, Wix!</h1>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Wix Sample App Demo</title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.22.0/js/Wix.js"></script>
 
-      <!-- @if NODE_ENV='development' -->
-      <script src="js/app.js"></script>
-      <!-- @endif -->
-      <!-- @if NODE_ENV='production' -->
-      <script src="js/app.min.js"></script>
-      <!-- @endif -->
-    </body>
+  <!-- @if NODE_ENV='development' -->
+  <link href="bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css" />
+  <!-- @endif -->
+
+  <!-- @if NODE_ENV='production' -->
+  <link rel="stylesheet" href="css/app.min.css" />
+  <!-- @endif -->
+
+  <script type="text/html" id="bubble">
+  </script>
+
+  <script type="text/html" id="bubble-step">
+    <!-- ko if: status() === 'step' -->
+    <!-- /ko -->
+    <div class="bubble available">
+      &nbsp;
+    </div>
+  </script>
+  <script type="text/html" id="media-video-vimeo">
+    <div class="step-media-video">
+      <iframe data-bind="attr: { src: vimeoURL }" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+      </iframe>
+    </div>
+  </script>
+  <script type="text/html" id="media-video-youtube">
+    <div class="step-media-video">
+      <iframe data-bind="attr: { src: youtubeURL }" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </script>
+  <script type="text/html" id="media-picture">
+    <div class="step-media-picture" data-bind="style: { backgroundImage: pictureURL }">
+    </div>
+  </script>
+  <script type="text/html" id="action-intro">
+    <button class="step-intro-button">Start cooking</button>
+  </script>
+  <script type="text/html" id="action-outro">
+    <button class="step-intro-button">Bon Appetit!</button>
+  </script>
+  <script type="text/html" id="action-tick">
+    <button class="step-done-button">Done</button>
+  </script>
+  <script type="text/html" id="action-timer">
+    <button class="step-timer-button">
+      Start countdown to
+      <span data-bind="text: duration"></span>
+    </button>
+  </script>
+</head>
+<body>
+  <div class="tastyhub-widget">
+    <div class="notification-bar" data-bind="visible: started">
+      <div class="bubble-stripe" data-bind="foreach: steps">
+        <!-- ko if: status() === 'done' -->
+        <div class="bubble done"> &#10003; </div>
+        <!-- /ko -->
+        <!-- ko if: status() === 'forbidden' -->
+          <div class="bubble forbidden"> &times; </div>
+        <!-- /ko -->
+        <!-- ko if: status() === 'progress' -->
+          <div class="bubble progress" data-bind="text: timeLeft"> </div>
+        <!-- /ko -->
+        <!-- ko if: status() === 'available' -->
+          <div class="bubble available"> &nbsp; </div>
+        <!-- /ko -->
+      </div> <!-- /bubble-stripe -->
+      <div class="bubble-indicator-stripe">
+        <div class="bubble-indicator" data-bind="style: { left: bubbleIndicator.left }"></div>
+      </div> <!-- /bubble-indicator-stripe -->
+    </div>
+    <div class="step-list" data-bind="foreach: steps">
+      <div class="step" data-bind="style: { left: style.left }">
+        <div class="step-media" data-bind="foreach: mediaItems">
+          <div class="step-media-item" data-bind="visible: $parent.mediaIndex() == $index(), template: mediaTemplateId"></div>
+        </div> <!-- /step-media -->
+        <div class="step-text">
+          <h2 class="step-header" data-bind="text: header"></h2>
+          <div class="step-description" data-bind="text: description">
+          </div>
+        </div> <!-- /step-text -->
+        <div class="step-action" data-bind="template: actionTemplateId">
+        </div> <!-- /step-action -->
+      </div>
+    </div>
+  </div>
+
+  <!-- @if NODE_ENV='development' -->
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+  <script src="vendor/jquery.ui.touch-punch.min.js"></script>
+  <script src="bower_components/knockout/build/output/knockout-latest.debug.js"></script>
+  <script src="bower_components/knockout.mapping/build/output/knockout.mapping-latest.debug.js"></script>
+  <script src="bower_components/knockout-sortable/build/knockout-sortable.js"></script>
+  <script src="js/app.js"></script>
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+  <!-- @endif -->
+  <!-- @if NODE_ENV='production' -->
+  <script src="js/app.min.js"></script>
+  <!-- @endif -->
+</body>
 </html>

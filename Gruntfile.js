@@ -38,7 +38,9 @@ grunt.initConfig({
   copy: {
     main: {
       files: [
-        { expand: true, cwd: 'src/img/', src: ['**'], dest: 'dist/img' }
+        { expand: true, cwd: 'src/img/', src: ['**'], dest: 'dist/img' },
+        { expand: true, cwd: 'src/vendor/', src: ['**'], dest: 'dist/vendor' },
+        { expand: true, cwd: 'src/bower_components/', src: ['**'], dest: 'dist/bower_components' }
       ]
     }
   },
@@ -165,7 +167,7 @@ grunt.loadNpmTasks( 'grunt-env' );
 grunt.loadNpmTasks( 'grunt-preprocess' );
 
 grunt.registerTask( 'compile', [ 'clean', 'concat', 'sass', 'preprocess', 'cssmin', 'uglify', 'copy' ] );
-grunt.registerTask( 'test', [ 'csslint', 'jshint', 'concat', 'jasmine' ] );
+grunt.registerTask( 'test', [ 'csslint', 'jshint', 'concat' ] );
 grunt.registerTask( 'build', [ 'compile', 'test' ] );
 grunt.registerTask( 'release', [ 'env:prod', 'build' ] );
 grunt.registerTask( 'serve', [ 'build', 'connect', 'watch' ] );
