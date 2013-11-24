@@ -89,6 +89,17 @@
     }, this);
     this.header = ko.observable(config.header || 'Header');
     this.description = ko.observable(config.description || 'Description');
+    this.tickImageURL = ko.computed(function () {
+      if (this.done()) {
+        return "img/checkbox_full.png";
+      } else {
+        return "img/checkbox_empty.png";
+      }
+    }, this);
+
+    this.select = function () {
+      recipe.stepIndex(this.index());
+    };
   }
 
   function RecipeViewModel (config) {

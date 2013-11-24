@@ -44,13 +44,14 @@
     </div>
   </script>
   <script type="text/html" id="action-intro">
-    <button class="step-intro-button">Start cooking</button>
+    <a href="#/steps/1">Start cooking</a>
   </script>
   <script type="text/html" id="action-outro">
-    <button class="step-intro-button">Bon Appetit!</button>
+    <a href="#/steps/0">Bon Appetit!</a>
   </script>
   <script type="text/html" id="action-tick">
-    <button class="step-done-button">Done</button>
+    <img data-bind="attr: { src: tickImageURL }" />
+    <a href="#" data-bind="click: function () { this.done(!this.done()); }">Done</a> <!-- return false -->
   </script>
   <script type="text/html" id="action-timer">
     <button class="step-timer-button">
@@ -64,16 +65,16 @@
     <div class="notification-bar" data-bind="visible: started">
       <div class="bubble-stripe" data-bind="foreach: steps">
         <!-- ko if: status() === 'done' -->
-        <div class="bubble done"> &#10003; </div>
+        <a data-bind="click: select" class="bubble done"> &#10003; </a>
         <!-- /ko -->
         <!-- ko if: status() === 'forbidden' -->
-          <div class="bubble forbidden"> &times; </div>
+        <a data-bind="click: select" class="bubble forbidden"> &times; </a>
         <!-- /ko -->
         <!-- ko if: status() === 'progress' -->
-          <div class="bubble progress" data-bind="text: timeLeft"> </div>
+        <a data-bind="click: select" class="bubble progress" data-bind="text: timeLeft"> </a>
         <!-- /ko -->
         <!-- ko if: status() === 'available' -->
-          <div class="bubble available"> &nbsp; </div>
+        <a data-bind="click: select" class="bubble available"> &nbsp; </a>
         <!-- /ko -->
       </div> <!-- /bubble-stripe -->
       <div class="bubble-indicator-stripe">

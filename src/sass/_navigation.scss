@@ -1,0 +1,56 @@
+@import 'compass/css3/box-sizing';
+
+$bubble-diameter: 30px;
+$notification-bar-background-color: black;
+
+.notification-bar {
+	width: 100%;
+	background: $notification-bar-background-color;
+	padding: 4px 0;
+
+	.current {
+		display: inline-block;
+		padding-bottom: 4px;
+		border-bottom: 2px solid yellow;
+	}
+}
+
+.bubble {
+	@include box-sizing('border-box');
+	position: relative;
+	display: inline-block;
+	width: $bubble-diameter;
+	height: $bubble-diameter;
+	margin: 0 2px;
+	font-size: 12px;
+	line-height: 12px;
+	border: 2px solid;
+	border-radius: $bubble-diameter;
+	text-align: center;
+
+	&.available {
+		border-color: yellow;
+	}
+
+	&.done {
+		color: white;
+		border-color: #6c3;
+		background-color: #6c3;
+	}
+
+	&.forbidden {
+		color: silver;
+		border-color: silver;
+	}
+
+	&.progress {
+		width: $bubble-diameter - 1px;
+		height: $bubble-diameter - 1px;
+		color: orange;	
+	}
+
+	span {
+		display: block;
+		position: absolute;
+	}
+}
