@@ -1,15 +1,104 @@
-<!Doctype html>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Widget for Wix App Market</title>
-  <script data-main="app/config" src="bower_components/requirejs/require.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TastyHub :: Wix App Market Widget</title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/html" id="media-video-vimeo">
+    <div class="step-media-video">
+      <iframe data-bind="attr: { src: vimeoURL }"
+              frameborder="0"
+              webkitallowfullscreen mozallowfullscreen allowfullscreen>
+      </iframe>
+    </div>
+  </script>
+
+  <script type="text/html" id="media-video-youtube">
+    <div class="step-media-video">
+      <iframe data-bind="attr: { src: youtubeURL }"
+              frameborder="0"
+              allowfullscreen>
+      </iframe>
+    </div>
+  </script>
+
+  <script type="text/html" id="media-picture">
+    <div class="step-media-picture"
+         data-bind="style: { backgroundImage: pictureURL }">
+    </div>
+  </script>
+
+  <script type="text/html" id="action-intro">
+    <a href="#/steps/1">Start cooking</a>
+  </script>
+
+  <script type="text/html" id="action-outro">
+    <a href="#/steps/0">Bon Appetit!</a>
+  </script>
+
+  <script type="text/html" id="action-tick">
+    <a href="#" data-bind="click: markDone, disable: status() === 'forbidden'">Done</a> <!-- return false -->
+  </script>
+
+  <script type="text/html" id="action-timer">
+    <a href="#" data-bind="click: countdown">
+      Countdown <span data-bind="text: duration"></span> minutes
+    </a>
+  </script>
+
+  <script type="text/html" id="bubble">
+    <!-- ko if: status() === 'done' -->
+    <a class="bubble done" data-bind="click: select"> &nbsp; </a>
+    <!-- /ko -->
+
+    <!-- ko if: status() === 'forbidden' -->
+    <a class="bubble forbidden" data-bind="click: select"> &nbsp; </a>
+    <!-- /ko -->
+
+    <!-- ko if: status() === 'progress' -->
+    <a class="bubble progress" data-bind="click: select, text: timeLeft"> </a>
+    <!-- /ko -->
+
+    <!-- ko if: status() === 'available' -->
+    <a class="bubble available" data-bind="click: select"> &nbsp; </a>
+    <!-- /ko -->
+  </script>
+
+  <script type="text/html" id="step">
+    <div class="step-media" data-bind="foreach: mediaItems">
+      <div class="step-media-item" data-bind="visible: $parent.mediaIndex() == $index(), template: mediaTemplateId"></div>
+    </div> <!-- /step-media -->
+    <div class="step-text">
+      <h2 class="step-header" data-bind="text: header"></h2>
+      <div class="step-description" data-bind="text: description">
+      </div>
+    </div> <!-- /step-text -->
+    <div class="step-action" data-bind="template: actionTemplateId">
+    </div> <!-- /step-action -->
+  </script>
+
 </head>
 <body>
-  <h1>tasty-hub running!</h1>
-  <div>
-      Data Binding: 
-      <span class="status" data-bind="text: status">Inactive</span>
-  </div>
+  <div class="tastyhub-widget" data-bind="style: { display: 'block' }">
+    <div class="notification-bar" data-bind="visible: started">
+      <div class="bubble-stripe" data-bind="foreach: { data: steps, template: 'bubble' }">
+      </div> <!-- /bubble-stripe -->
+      <div class="bubble-indicator-stripe">
+        <div class="bubble-indicator" data-bind="style: { left: bubbleIndicator.left }"></div>
+      </div> <!-- /bubble-indicator-stripe -->
+    </div> <!-- /notification-bar -->
+    <div class="step-list" data-bind="foreach: steps">
+      <div class="step" data-bind="visible: $index() == $parent.stepIndex(), css: { grayscale: status() === 'forbidden' }, template: 'step'">
+      </div> <!-- /step -->
+    </div> <!-- /step-list -->
+  </div> <!-- /tastyhub-widget -->
+
+  <script type="text/javascript" src="//sslstatic.wix.com/services/js-sdk/1.22.0/js/Wix.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script data-main="app/config" src="bower_components/requirejs/require.js"></script>
 </body>
 </html>
