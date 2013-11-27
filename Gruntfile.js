@@ -1,181 +1,132 @@
-/* jshint maxlen:120 */
-/* global module, process */
+/*global module*/
+
+(function () {
+
+'use strict';
+
 module.exports = function(grunt) {
 
-grunt.initConfig({
-  pkg: grunt.file.readJSON('package.json'),
-  meta: {
-    banner:
-      '/*!\n' +
-      ' * Wix Sample App <%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd, HH:MM") %>)\n' +
-      ' * https://github.com/noomorph/wix-sample-app\n' +
-      ' * (c) <%= grunt.template.today("yyyy") %>, Iaroslav Sergieiev' +
-      ' */'
-  },
-
-  env: {
-    dev: {
-      NODE_ENV: 'development'
+  // Project configuration.
+  grunt.initConfig({
+    // Metadata.
+    pkg: grunt.file.readJSON('package.json'),
+    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+    // Task configuration.
+    clean: {
+      files: ['dist']
     },
-    prod: {
-      NODE_ENV: 'production'
-    }
-  },
-
-  clean: ['dist/'],
-
-  preprocess : {
-    index : {
-      src : 'src/index.html',
-      dest : 'dist/index.html'
-    },
-    settings : {
-      src : 'src/settings.html',
-      dest : 'dist/settings.html'
-    }
-  },
-
-  copy: {
-    main: {
-      files: [
-        { expand: true, cwd: 'src/img/', src: ['**'], dest: 'dist/img' },
-        { expand: true, cwd: 'src/vendor/', src: ['**'], dest: 'dist/vendor' }
-      ]
-    },
-	bower: {
-      files: [
-        { expand: true, cwd: 'src/bower_components/', src: ['**'], dest: 'dist/bower_components' }
-      ]
-	}
-  },
-
-  jasmine: {
-    src: ['dist/js/app.js'],
-    options: {
-      specs: 'spec/**/*.js'
-    }
-  },
-
-  uglify: {
-    options: {
-      banner: '<%= meta.banner %>\n'
-    },
-    build: {
-      files: {
-        'dist/js/app.min.js' : ['dist/js/app.js']
-      }
-    }
-  },
-
-  cssmin: {
-    minify: {
-      expand: true,
-      cwd: 'dist/css/',
-      src: ['*.css', '!*.min.css'],
-      dest: 'dist/css',
-      ext: '.min.css'
-    }
-  },
-
-  csslint: {
-    strict: {
+    concat: {
       options: {
-        "box-sizing": false,
-        "adjoining-classes": false,
-        "ids": false,
-        "outline-none": false
+        banner: '<%= banner %>',
+        stripBanners: true
       },
-      src: ['dist/css/*.css', '!dist/css/*.min.css']
-    }
-  },
-
-  sass: {
-    main: {
-      options: {
-        compass: true
-      },
-      files: {
-        'dist/css/app.css': 'src/sass/app.scss'
+      dist: {
+        src: ['components/requirejs/require.js', '<%= concat.dist.dest %>'],
+        dest: 'dist/require.js'
       }
-    }
-  },
-
-  jshint: {
-    files: [ 'Gruntfile.js', 'dist/js/**/*.js',  '!dist/js/**/*.min.js' ],
-    options: {
-      jshintrc: '.jshintrc'
-    }
-  },
-
-  concat: {
-    options: {
-      separator: '\n\n;\n\n'
     },
-    app: {
-      src: [
-        'src/js/app.js'
-      ],
-      dest: 'dist/js/app.js'
-    }
-  },
-
-  connect: {
-    server: {
+    uglify: {
       options: {
-        port: process.env.PORT || 8000,
-        base: './dist/',
-        hostname: '0.0.0.0',
-        middleware: function(connect, options) {
-          var middlewares = [];
-          var directory = options.directory || options.base[options.base.length - 1];
-          if (!Array.isArray(options.base)) {
-            options.base = [options.base];
+        banner: '<%= banner %>'
+      },
+      dist: {
+        src: '<%= concat.dist.dest %>',
+        dest: 'dist/require.min.js'
+      }
+    },
+    qunit: {
+      files: ['test/**/*.html']
+    },
+    jshint: {
+      gruntfile: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        src: 'Gruntfile.js'
+      },
+      app: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        src: ['app/**/*.js']
+      },
+      test: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        src: ['test/**/*.js']
+      }
+    },
+    watch: {
+      gruntfile: {
+        files: '<%= jshint.gruntfile.src %>',
+        tasks: ['jshint:gruntfile']
+      },
+      src: {
+        files: '<%= jshint.src.src %>',
+        tasks: ['jshint:src', 'qunit']
+      },
+      test: {
+        files: '<%= jshint.test.src %>',
+        tasks: ['jshint:test', 'qunit']
+      }
+    },
+    requirejs: {
+      compile: {
+        options: {
+          name: 'config',
+          mainConfigFile: 'app/config.js',
+          out: '<%= concat.dist.dest %>',
+          optimize: 'none'
+        }
+      }
+    },
+    connect: {
+      development: {
+        options: {
+          keepalive: true
+        }
+      },
+      production: {
+        options: {
+          keepalive: true,
+          port: 8000,
+          middleware: function(connect, options) {
+            return [
+              // rewrite requirejs to the compiled version
+              function(req, res, next) {
+                if (req.url === '/components/requirejs/require.js') {
+                  req.url = '/dist/require.min.js';
+                }
+                next();
+              },
+              connect['static'](options.base)
+            ];
           }
-          middlewares.push(connect.compress());
-          options.base.forEach(function(base) {
-            middlewares.push(connect.static(base));
-          });
-          middlewares.push(connect.directory(directory));
-          return middlewares;
         }
       }
     }
-  },
+  });
 
-  watch: {
-    main: {
-      files: [ 'Gruntfile.js', 'src/js/**/*.js', 'src/sass/**/*.scss', 'src/*.html' ],
-      tasks: 'rebuild'
-    },
-    test: {
-      files: [ 'Gruntfile.js', 'spec/**/*.js', 'src/js/**/*.js' ],
-      tasks: 'test'
-    }
-  }
+  // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
-});
-
-// Dependencies
-grunt.loadNpmTasks( 'grunt-contrib-jasmine' );
-grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
-grunt.loadNpmTasks( 'grunt-contrib-csslint' );
-grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-grunt.loadNpmTasks( 'grunt-contrib-watch' );
-grunt.loadNpmTasks( 'grunt-contrib-sass' );
-grunt.loadNpmTasks( 'grunt-contrib-connect' );
-grunt.loadNpmTasks( 'grunt-contrib-concat' );
-grunt.loadNpmTasks( 'grunt-contrib-clean' );
-grunt.loadNpmTasks( 'grunt-contrib-copy' );
-grunt.loadNpmTasks( 'grunt-env' );
-grunt.loadNpmTasks( 'grunt-preprocess' );
-
-grunt.registerTask( 'compile', [ 'concat', 'sass', 'preprocess', 'cssmin', 'uglify', 'copy:main' ] );
-grunt.registerTask( 'test', [ 'csslint', 'jshint', 'concat' ] );
-grunt.registerTask( 'build', [ 'clean', 'compile', 'copy:bower', 'test' ] );
-grunt.registerTask( 'rebuild', [ 'compile', 'test' ] );
-grunt.registerTask( 'release', [ 'env:prod', 'build' ] );
-grunt.registerTask( 'serve', [ 'build', 'watch' ] );
-grunt.registerTask( 'default', [ 'env:dev', 'serve' ] );
+  // Default task.
+  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'requirejs', 'concat', 'uglify']);
+  grunt.registerTask('preview', ['connect:development']);
+  grunt.registerTask('preview-live', ['default', 'connect:production']);
 
 };
+
+}());
