@@ -11,7 +11,7 @@ redis.on("error", function (err) {
 });
 
 app.use(express.logger()).
-    use(express.static('.')).
+    use(express.static('public')).
     use(express.query()).
     use(express.bodyParser());
 

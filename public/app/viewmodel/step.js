@@ -1,6 +1,8 @@
 /* global define */
 
 define(["knockout", "vm/step_media_item"], function (ko, StepMediaItemViewModel) {
+  var MS_IN_MINUTE = 60 * 1000;
+
   function StepViewModel (config, recipe, defaults) {
     config = config || {};
     defaults = defaults || {};
@@ -79,16 +81,32 @@ define(["knockout", "vm/step_media_item"], function (ko, StepMediaItemViewModel)
       recipe.stepIndex(this.index());
     };
 
-    this.countdown = function () {
-      this.started(new Date());
-    };
-
-    this.markDone = function () {
-      this.done(!this.done());
+    this.goNext = function () {
       var next = this.index() + 1;
       if (next < recipe.steps().length) {
         recipe.stepIndex(next);
       }
+    };
+
+    this.countdown = function () {
+      this.started(new Date());
+      this.goNext();
+    };
+
+    this.timeLeft = ko.computed(function () {
+      var started = this.started(),
+          duration = this.duration() * MS_IN_MINUTE,
+          left;
+
+      if (started && duration) {
+        left = (started - new Date()) + duration;
+        return Math.round(Math.max(0, left / MS_IN_MINUTE));
+      }
+    }, this);
+
+    this.markDone = function () {
+      this.done(true);
+      this.goNext();
     };
   }
   return StepViewModel;

@@ -8,6 +8,9 @@
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
+  <link href="bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css" />
+
   <script type="text/html" id="media-video-vimeo">
     <div class="step-media-video">
       <iframe data-bind="attr: { src: vimeoURL }"
@@ -52,19 +55,27 @@
 
   <script type="text/html" id="bubble">
     <!-- ko if: status() === 'done' -->
-    <a class="bubble done" data-bind="click: select"> &nbsp; </a>
+    <a class="bubble done"
+       data-bind="click: select"> &nbsp;
+    </a>
     <!-- /ko -->
 
     <!-- ko if: status() === 'forbidden' -->
-    <a class="bubble forbidden" data-bind="click: select"> &nbsp; </a>
+    <a class="bubble forbidden"
+       data-bind="click: select"> &nbsp;
+    </a>
     <!-- /ko -->
 
     <!-- ko if: status() === 'progress' -->
-    <a class="bubble progress" data-bind="click: select, text: timeLeft"> </a>
+    <a class="bubble progress"
+       data-bind="click: select, text: timeLeft()">
+    </a>
     <!-- /ko -->
 
     <!-- ko if: status() === 'available' -->
-    <a class="bubble available" data-bind="click: select"> &nbsp; </a>
+    <a class="bubble available"
+       data-bind="click: select"> &nbsp;
+    </a>
     <!-- /ko -->
   </script>
 
@@ -85,7 +96,7 @@
 <body>
   <div class="tastyhub-widget" data-bind="style: { display: 'block' }">
     <div class="notification-bar" data-bind="visible: started">
-      <div class="bubble-stripe" data-bind="foreach: { data: steps, template: 'bubble' }">
+      <div class="bubble-stripe" data-bind="template: { name: 'bubble', foreach: steps }">
       </div> <!-- /bubble-stripe -->
       <div class="bubble-indicator-stripe">
         <div class="bubble-indicator" data-bind="style: { left: bubbleIndicator.left }"></div>

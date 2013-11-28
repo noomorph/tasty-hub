@@ -10,12 +10,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
-    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
-    // Task configuration.
+    banner:
+      '/*!\n' +
+      ' * Tasty Hub <%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd, HH:MM") %>)\n' +
+      ' * https://github.com/noomorph/tasty-hub\n' +
+      ' * (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author %>' +
+      ' * Original idea by <%= pkg.author.idea %>' +
+      ' */\n',
     clean: {
       files: ['dist']
     },
@@ -25,8 +26,18 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['components/requirejs/require.js', '<%= concat.dist.dest %>'],
-        dest: 'dist/require.js'
+        src: ['public/components/requirejs/require.js', '<%= concat.dist.dest %>'],
+        dest: 'public/dist/require.js'
+      }
+    },
+    sass: {
+      main: {
+        options: {
+          compass: true
+        },
+        files: {
+          'public/css/app.css': 'public/sass/app.scss'
+        }
       }
     },
     uglify: {
@@ -35,7 +46,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: '<%= concat.dist.dest %>',
-        dest: 'dist/require.min.js'
+        dest: 'public/dist/require.min.js'
       }
     },
     qunit: {
@@ -52,7 +63,7 @@ module.exports = function(grunt) {
         options: {
           jshintrc: '.jshintrc'
         },
-        src: ['app/**/*.js']
+        src: ['public/app/**/*.js']
       },
       test: {
         options: {
@@ -79,7 +90,7 @@ module.exports = function(grunt) {
       compile: {
         options: {
           name: 'config',
-          mainConfigFile: 'app/config.js',
+          mainConfigFile: 'public/app/config.js',
           out: '<%= concat.dist.dest %>',
           optimize: 'none'
         }
@@ -115,6 +126,7 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -123,7 +135,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'requirejs', 'concat', 'uglify']);
+  grunt.registerTask('default', [
+    'clean',
+    'jshint', 'qunit',
+    'requirejs', 'concat',
+    'uglify', 'sass'
+  ]);
+
   grunt.registerTask('preview', ['connect:development']);
   grunt.registerTask('preview-live', ['default', 'connect:production']);
 
