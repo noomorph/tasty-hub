@@ -25,6 +25,10 @@ grunt.initConfig({
   clean: ['dist/'],
 
   preprocess : {
+    editor : {
+      src : 'src/editor.html',
+      dest : 'dist/editor.html'
+    },
     index : {
       src : 'src/index.html',
       dest : 'dist/index.html'
@@ -95,7 +99,8 @@ grunt.initConfig({
         compass: true
       },
       files: {
-        'dist/css/app.css': 'src/sass/app.scss'
+        'dist/css/app.css': 'src/sass/app.scss',
+        'dist/css/editor.css': 'src/sass/editor.scss'
       }
     }
   },

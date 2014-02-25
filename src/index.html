@@ -53,32 +53,33 @@
 </head>
 <body>
   <div class="tastyhub-widget" data-bind="style: { display: 'block' }">
-    <div class="notification-bar" data-bind="visible: started">
-      <div class="bubble-stripe" data-bind="foreach: steps">
-        <!-- ko if: status() === 'done' -->
-        <a class="bubble done" data-bind="click: select"> &nbsp; </a>
-        <!-- /ko -->
-        <!-- ko if: status() === 'forbidden' -->
-        <a class="bubble forbidden" data-bind="click: select"> &nbsp; </a>
-        <!-- /ko -->
-        <!-- ko if: status() === 'progress' -->
-        <a class="bubble progress" data-bind="click: select, text: timeLeft"> </a>
-        <!-- /ko -->
-        <!-- ko if: status() === 'available' -->
-        <a class="bubble available" data-bind="click: select"> &nbsp; </a>
-        <!-- /ko -->
-      </div> <!-- /bubble-stripe -->
-      <div class="bubble-indicator-stripe">
-        <div class="bubble-indicator" data-bind="style: { left: bubbleIndicator.left }"></div>
-      </div> <!-- /bubble-indicator-stripe -->
-    </div>
     <div class="step-list" data-bind="foreach: steps">
 	  <div class="step" data-bind="visible: $index() == $parent.stepIndex(), css: { grayscale: status() === 'forbidden' }">
         <div class="step-media" data-bind="foreach: mediaItems">
           <div class="step-media-item" data-bind="visible: $parent.mediaIndex() == $index(), template: mediaTemplateId"></div>
         </div> <!-- /step-media -->
+        <!-- ko with: $root -->
+        <div class="notification-bar" data-bind="visible: started">
+          <div class="bubble-stripe" data-bind="foreach: steps">
+            <!-- ko if: status() === 'done' -->
+            <a class="bubble done" data-bind="click: select"> &nbsp; </a>
+            <!-- /ko -->
+            <!-- ko if: status() === 'forbidden' -->
+            <a class="bubble forbidden" data-bind="click: select"> &nbsp; </a>
+            <!-- /ko -->
+            <!-- ko if: status() === 'progress' -->
+            <a class="bubble progress" data-bind="click: select, text: timeLeft"> </a>
+            <!-- /ko -->
+            <!-- ko if: status() === 'available' -->
+            <a class="bubble available" data-bind="click: select"> &nbsp; </a>
+            <!-- /ko -->
+          </div> <!-- /bubble-stripe -->
+          <div class="bubble-indicator-stripe">
+            <div class="bubble-indicator" data-bind="style: { left: bubbleIndicator.left }"></div>
+          </div> <!-- /bubble-indicator-stripe -->
+        </div>
+        <!-- /ko -->
         <div class="step-text">
-          <h2 class="step-header" data-bind="text: header"></h2>
           <div class="step-description" data-bind="text: description">
           </div>
         </div> <!-- /step-text -->

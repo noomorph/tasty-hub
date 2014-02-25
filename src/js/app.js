@@ -87,7 +87,6 @@
     this.mediaItems = (config.mediaItems || [{}]).map(function (mediaItem) {
       return new StepMediaItemViewModel(mediaItem);
     }, this);
-    this.header = ko.observable(config.header || 'Header');
     this.description = ko.observable(config.description || 'Description');
     this.tickImageURL = ko.computed(function () {
       if (this.done()) {

@@ -1,12 +1,13 @@
 @import 'compass/css3/box-sizing';
 
-$bubble-diameter: 30px;
-$notification-bar-background-color: black;
+$bubble-diameter: 10px;
 
 .notification-bar {
 	width: 100%;
-	background: $notification-bar-background-color;
+	background: #000;
+	background: rgba(0, 0, 0, 0.5);
 	padding: 2px 0;
+	margin-top: -20px;
 }
 
 .bubble {
@@ -24,7 +25,7 @@ $notification-bar-background-color: black;
 	cursor: pointer;
 
 	&.available {
-		border-color: yellow;
+		border-color: #eee;
 	}
 
 	&.done {

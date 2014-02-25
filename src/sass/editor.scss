@@ -1,0 +1,73 @@
+@import 'compass/reset';
+@import 'compass/css3/box-sizing';
+
+html {
+    background: url(/img/linen.png);
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: white;
+    padding-top: 1em;
+}
+
+input, a {
+    color: #fff;
+}
+    
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline-block;
+    position: relative;
+}
+
+img {
+    margin: 10px 5px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px #000;
+    display: block;
+    min-width: 32px;
+    max-width: 256px;
+}
+
+img:hover {
+    opacity: 0.9;
+}
+
+.step-index {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    width: 40px;
+    padding: 0.5em 0;
+    font-size: 1.6em;
+    background: #666;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px 0 10px 0;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+}
+
+.recipe-name-label {
+    margin-right: 1em;
+}
+
+.recipe-name-editor {
+    background: #333;
+    background: rgba(0, 0, 0, 0.3);
+    border: 0;
+    padding: 10px 1em 10px 1em;
+    border-radius: 25px;
+    min-width: 35%;
+    max-width: 55%;
+}
+

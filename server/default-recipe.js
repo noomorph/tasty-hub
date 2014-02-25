@@ -1,119 +1,78 @@
 /* global module */
+/* jshint maxlen: 200 */
 
 module.exports = {
   steps: [
     {
-      mediaItems: [{ src: 'img/ingredients.jpg'}],
-      header: 'Prepare ingredients',
-      description:
-        '2 large or 3 medium beets, thoroughly washed. \n' + 
-        '2 large or 3 medium potatoes, sliced into bite-sized pieces.\n' +
-        '4 Tbsp of cooking oil. \n' +
-        '1 medium onion, finely chopped. \n' +
-        '2 carrots, grated \n' +
-        '1/2 head of cabbage, thinly chopped (see picture) \n' +
-        '1 can kidney beans with their juice \n' +
-        '2 bay leaves \n' +
-        '16 cup of water \n' +
-        '5 Tbsp ketchup \n' +
-        '4 Tbsp lemon juice \n' +
-        '1/4 tsp freshly ground pepper \n' +
-        '1 Tbsp dill'
+      "mediaItems": [{"src":"http://distilleryimage6.ak.instagram.com/e51cf24096f911e3874612e79814bf9e_8.jpg"}],
+      "description": "Ингредиенты: 4 куриных бедра"
     },
     {
-      mediaItems: [{ src: 'img/1.jpg'}],
-      header: 'Boiling beets',
-      description:
-        'Fill a large soup pot with 10 cups of water.\n' +
-        'Add 2 – 3 beets. Cover and boil for about 1 hour \n' +
-        '(some beats take longer, some take less time. \n' +
-        'It depends on how old the beets are). \n' +
-        'Once you can smoothly pierce the beets \n' +
-        'with a butter knife, remove from the water \n' +
-        'and set aside to cool. Keep the water.'
+      "mediaItems": [{"src":"http://distilleryimage9.ak.instagram.com/4a9bb1e296fa11e3a186128d6d65d98d_8.jpg"}],
+      "description": "Ингредиенты: 0.5кг морковки"
     },
     {
-      mediaItems: [{ src: 'img/2.1.jpg'}],
-      header: 'Boiling broth',
-      duration: 15,
-      description: 'Continue boiling broth on the middle fire.',
-      depends: [1]
+      "mediaItems": [{"src":"http://distilleryimage3.ak.instagram.com/79cb43ce96fa11e38d10121e089bf167_8.jpg"}],
+      "description": "Ингредиенты: 2 средних луковицы"
     },
     {
-      mediaItems: [{ src: 'img/3.jpg'}],
-      header: 'Slicing potatoes',
-      description: 'Slice 3 potatoes.'
+      "mediaItems": [{"src":"http://distilleryimage3.ak.instagram.com/c81e434696fa11e3a9e712b70a96e02f_8.jpg"}],
+      "description": "Ингредиенты: 3 помидора и 50г петрушки"
     },
     {
-      mediaItems: [{ src: 'img/4.jpg'}],
-      header: 'Adding and boiling potatoes',
-      description: 'Add potatoes into the same water and boil 15-20 minutes.'
+      "mediaItems": [{"src":"http://distilleryimage10.ak.instagram.com/1917086496fb11e384d00e5a8c16bf4a_8.jpg"}],
+      "description": "Покрываем дно кастрюли рафинированным маслом"
     },
     {
-      mediaItems: [{ src: 'img/5.jpg'}],
-      header: 'Grating carrots and dicing onion',
-      description: 'Grate both carrots and dice one onion.'
+      "mediaItems": [{"src":"http://distilleryimage8.ak.instagram.com/6c6f142096fb11e3963d0eddec20ee24_8.jpg"}],
+      "description": "Ставим кастрюлю на медленный огонь"
     },
     {
-      mediaItems: [{ src: 'img/6.1.jpg'}],
-      header: 'Roasting',
-      description: 
-        'Take carrots and onion. \n' +
-        'Add 4 Tbsp of cooking oil \n' +
-        'to the skillet and saute vegetables \n' +
-        'until they are soft. \n' +
-        'Stir in ketchup when they are \n' +
-        'almost done cooking. '
+      "mediaItems": [{"src":"http://distilleryimage3.ak.instagram.com/bcbf3d6096fb11e39a3d129ccd9180c7_8.jpg"}],
+      "description": "Солим и перчим мясо"
     },
     {
-      mediaItems: [{ src: 'img/7.jpg'}],
-      header: 'Shredding cabbage ',
-      description: 'Thinly shred 1/2 a cabbage.'
+      "mediaItems": [{"src":"http://distilleryimage10.ak.instagram.com/396f265e96fc11e393a6121f8691a216_8.jpg"}],
+      "description": "Выкладываем первый слой мяса..."
     },
     {
-      mediaItems: [{ src: 'img/8.jpg'}],
-      header: 'Adding cabbage and boiling',
-      description:
-        'Add cabbage to the pot\n' +
-        'when potatoes are half way done\n' +
-        'and boil 7-10min.'
+      "mediaItems": [{"src":"http://distilleryimage6.ak.instagram.com/7c923b0696fc11e396711288448a065e_8.jpg"}],
+      "description": "Нарезаем помидоры мелкими кусочками"
     },
     {
-      mediaItems: [{ src: 'img/9.jpg'}],
-      header: 'Pealing and slicing beets',
-      description:
-        'Next, peel and slice the beets' +
-        'into match sticks.'
+      "mediaItems": [{"src":"http://distilleryimage5.ak.instagram.com/cd73979a96fc11e386e80e4f1a9e4cfd_8.jpg"}],
+      "description": "Нарезаем лук крупными кусочками"
     },
     {
-      mediaItems: [{ src: 'img/10.jpg'}],
-      header: 'Adding ingredients and finish',
-      description:
-        'Add 6 cups of water, beets, lemon juice, ' +
-        'pepper, bay leaves and can of kidney beans ' +
-        '(with their juice). Also add sauted carrots ' +
-        'and onion to the pot along with chopped dill. ' +
-        'Cook 5-10 minutes, until the cabbage is done.'
+      "mediaItems": [{"src":"http://distilleryimage11.ak.instagram.com/ff70809696fc11e3bad51265e271254f_8.jpg"}],
+      "description": "Добавляем в кастрюлю помидоры (или если их нет, то разбавленную томатную пасту)"
     },
     {
-      mediaItems: [{ src: 'img/10.1.jpg'}],
-      header: 'Adding ingredients and finish',
-      description:
-        'Add 6 cups of water, beets, lemon juice, ' +
-        'pepper, bay leaves and can of kidney beans ' +
-        '(with their juice). Also add sauted carrots ' +
-        'and onion to the pot along with chopped dill. ' +
-        'Cook 5-10 minutes, until the cabbage is done.'
+      "mediaItems": [{"src":"http://distilleryimage0.ak.instagram.com/58e8881c96fd11e3aef612141806e92c_8.jpg"}],
+      "description": "Если используем томатную пасту, то она должна частично покрывать мясо"
     },
     {
-      mediaItems: [{ src: 'img/main.jpg'}],
-      header: 'Serving',
-      description:
-        'Please serve the borsch with a dollop of sour ' +
-        'cream or real mayo. Wish you bon appetite and ' +
-        'enjoy the GREAT TASTE you did yourself! \n' +
-        'P.S. Keep TastyHub in secret and you \n' +
-        'will be appreciated as a chef.'
-    }
-  ]
+      "mediaItems": [{"src":"http://distilleryimage2.ak.instagram.com/bd01fe6496fd11e3911c127f85a62e1a_8.jpg"}],
+      "description": "Добавляем половину нарезанной моркови на первый слой."
+    },
+    {
+      "mediaItems": [{"src":"http://distilleryimage2.ak.instagram.com/6692579e96fe11e38fa71247c1292a16_8.jpg"}],
+      "description": "Добавляем половину нарезанного лука на первый слой"
+    },
+    {
+      "mediaItems": [{"src":"http://distilleryimage8.ak.instagram.com/c3826c3c96fe11e38936125381345354_8.jpg"}],
+      "description": "Добавляем пряный соус сацебели для придания особого вкуса"
+    },
+    {
+      "mediaItems": [{"src":"http://distilleryimage4.ak.instagram.com/222e869e96ff11e39ef30ecb098d5c88_8.jpg"}],
+      "description": "Выкладываем второй слой мяса и повторяем для него процедуру выкладывания моркови, лука, помидоров (пасты),"
+    },
+    {
+      "mediaItems": [{"src":"http://distilleryimage10.ak.instagram.com/7e4e775496ff11e381461210f3d6278e_8.jpg"}],
+      "description": "Нарезаем зелень"
+    },
+    {
+      "mediaItems": [{"src":"http://distilleryimage7.ak.instagram.com/ba39320496ff11e39bf10e989712abf7_8.jpg"}],
+      "description": "Накрыть кастрюлю крышкой и на медленном огне варить 1 час; после - добавить зелень и дать настояться."
+    }]
 };
