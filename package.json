@@ -20,7 +20,7 @@
     "b64url": "~1.0.3",
     "crypto": "0.0.3",
     "redis": "~0.9.1",
-    "socket.io": "~0.9.16"
+    "socket.io": "~1.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
